@@ -6,9 +6,12 @@ export class UpdateStudentController {
     const {id} = req.params;
     const {name, age, email, password} = req.body;
     const updateStudent = new UpdateStundentService();
+    const result = await updateStudent.execute({id, name, age, email, password});
 
-    const result = updateStudent.execute({id, name, age, email, password});
-    console.log(result);
+    if(result instanceof Error) {
+      return res.status(400).json(result.message);
+    }
+    
     return res.status(200).json(result);
   }
 }

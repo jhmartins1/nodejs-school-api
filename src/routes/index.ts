@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { studentRoute } from "./student.routes";
+import { studentRouter } from "./student.routes";
+import { teacherRouter } from "./teacher.routes";
 
 const routes = Router();
 
-routes.use('/student', studentRoute);
+routes.use('/student', studentRouter);
+routes.use('/teacher', teacherRouter);
 
 export {routes}

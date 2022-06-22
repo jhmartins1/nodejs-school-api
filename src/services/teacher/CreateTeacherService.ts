@@ -1,16 +1,8 @@
 import { prisma } from "../../prisma/client";
+import { ITeacher } from "../../utils/TeacherUtils";
 
-export interface IStudent {
-  id?: string;
-  name: string;
-  age: number;
-  email: string;
-  password: string
-}
-
-export class CreateStudentService {
-  async execute({name, age, email, password}: IStudent): Promise<IStudent | Error> {
-
+export class CreateTeacherService {
+  async execute({name, age, email, password, subjects}: ITeacher) {
     if(!name) {
       return new Error("Name is missing!");
     }
@@ -27,25 +19,30 @@ export class CreateStudentService {
       return new Error("Email is missing!");
     }
 
-    const checkIfEmailExists = await prisma.student.findUnique({
+    if(!subjects) {
+      return new Error("Email is missing!");
+    }
+
+    const checkIfEmailExists = await prisma.teacher.findUnique({
       where: {
         email
       }
     })
 
     if(checkIfEmailExists) {
-      return new Error("Email already using!")
+      return new Error("Email already using.")
     }
 
-    const student = await prisma.student.create({
+    const teacher = await prisma.teacher.create({
       data: {
         name: name,
         age: age,
         email: email,
-        password: password
+        password: password,
+        Subjects: subjects
       }
     })
-    
-    return student;
+
+    return teacher;
   }
 }
