@@ -1,4 +1,4 @@
-# NODEJS SCHOOL CRUD API
+# NodeJS School Crud Api
 
 Aplicação back-end desenvolvida em Node.js com Typescript, utilizando o Prisma ORM e um banco de dados MySQL. A aplicação irá implementar as operações básicas do CRUD (Create, Read, Update e Delete) para gerenciar as informações de uma escola.
 
